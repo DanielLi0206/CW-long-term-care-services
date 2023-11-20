@@ -70,7 +70,6 @@
     </swiper>
   </section>
 </template>
-
 <style lang="scss" scoped>
   .section{
     padding-top: 120px;
@@ -111,59 +110,11 @@
         }
       }
     }
-    &-button{
-      &-next{
-        width: 64px;
-        height: 64px;
-        background-image: url(@/assets/images/slide_arrow.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        right: 20.833%;
-        &:after {
-          content: none;
-        }
-      }
-      &-prev{
-        &:after {
-          content: none;
-        }
-      }
-    }
-    &-pagination {
-      &-bullet{
-        background-color: transparent;
-        border: 1.5px solid #CADEDF;
-        opacity: 1;
-        &-active{
-          background-color: #EC6C00;
-          border: 1.5px solid transparent;
-        }
-      }
-    }
 
     @include mobile {
       &-slide {
         width: 93.16%;
       }
-      &-button{
-        &-next{
-          width: 32px;
-          height: 32px;
-          right: 40px;
-          top: 94px;
-        }
-      }
-    }
-  }
-  .mySwiper .swiper-pagination-bullets{
-    width: initial;
-    left: 11%;
-    bottom: 10%;
-
-    @include mobile {
-      left: 0;
-      bottom: 0;
     }
   }
   .slide{
@@ -237,6 +188,56 @@
         letter-spacing: 1.4px;
         text-shadow: none;
       }
+    }
+  }
+</style>
+<style lang="scss">
+  .swiper {
+    &-button{
+      &-next{
+        width: 64px;
+        height: 64px;
+        background-image: url(@/assets/images/slide_arrow.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        right: 20.833%;
+        &:after {
+          content: none;
+        }
+        @include mobile {
+          width: 32px;
+          height: 32px;
+          right: 40px;
+          top: 94px;
+        }
+      }
+      &-prev{
+        &:after {
+          content: none;
+        }
+      }
+    }
+    &-pagination {
+      &-bullet{
+        background-color: transparent;
+        border: 1.5px solid #CADEDF;
+        opacity: 1;
+        &-active{
+          background-color: #EC6C00;
+          border: 1.5px solid transparent;
+        }
+      }
+    }
+  }
+  .mySwiper .swiper-pagination-bullets{
+    width: initial;
+    left: 11%;
+    bottom: 10%;
+
+    @include mobile {
+      left: 0;
+      bottom: 0;
     }
   }
 </style>
