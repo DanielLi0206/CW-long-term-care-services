@@ -1,6 +1,6 @@
 <script setup>
-  import Title from '../components/TitleItem.vue';
-  import Button from '../components/ButtonItem.vue';
+  import Title from '@/components/TitleItem.vue';
+  import Button from '@/components/ButtonItem.vue';
   import cardImage1 from '@/assets/images/card_01.png';
   import cardImage2 from '@/assets/images/card_02.png';
   import cardImage3 from '@/assets/images/card_03.png';
@@ -50,9 +50,28 @@
 <style lang="scss" scoped>
   .section {
     padding-top: 120px;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -5%);
+      width: 1440px * 0.88;
+      height: 1440px * 0.88;
+      background-color: #CADEDF;
+      opacity: 0.2;
+      border-radius: 50%;
+      z-index: -1;
+    }
     @include mobile {
       padding-top: 56px;
       padding-bottom: 56px;
+
+      &:after {
+        top: 283px;
+        transform: translate(-50%, 0);
+      }
     }
   }
   .wrapper {
@@ -68,11 +87,12 @@
       position: absolute;
       left: 0;
       bottom: 0;
+      z-index: 1;
       width: 430px;
       height: 28px;
       background-image: url(@/assets/images/visual_line.svg);
       background-repeat: no-repeat;
-      block-size: content;
+      background-size: content;
     }
 
     @include mobile {
