@@ -34,11 +34,13 @@
     <Title :first="title.first" :second="title.second" :subtitle="title.subtitle"  />
     <div class="wrapper">
       <div class="card" v-for="(item, index) in cardData" :key="index">
-        <img :src="item.image" class="card__image" :alt="item.title">
+        <figure class="card__image">
+          <img :src="item.image" :alt="item.title">
+        </figure>
         <h3 class="card__title">{{ item.title }}</h3>
         <p class="card__content">{{ item.content }}</p>
       </div>
-      <div class="callToAction">
+      <div class="button">
         <Button text="了解更多長照2.0" href="https://ltcpap.mohw.gov.tw/public/index.html" />
       </div>
     </div>
@@ -84,17 +86,37 @@
   }
   .card {
     text-align: center;
+
     &:nth-child(2) {
       margin-top: -40px;
       @include mobile {
         margin-top: 0;
       }
     }
+
     &__image {
       border-radius: 50%;
-      border: 2px solid #008088;
       padding: 6px;
       margin-bottom: 16px;
+      position: relative;
+      img {
+        display: block;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(@/assets/images/card_border.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation: surround ease-in-out infinite;
+        animation-fill-mode: forwards;
+        animation-duration: 1s;
+      }
+      
     }
     &__title {
       color: #008088;
@@ -125,14 +147,24 @@
       }
     }
   }
-  .callToAction {
+  .button {
     position: absolute;
     bottom: 35px;
     right: 0;
 
     @include mobile {
       position: static;
-      text-align: center;
+      display: block;
+      margin: auto;
     }
   }
+
+@keyframes surround {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 </style>
