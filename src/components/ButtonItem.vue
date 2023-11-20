@@ -33,7 +33,10 @@
     text-decoration: none;
 
     @include mobile {
-      width: 270px;
+      width: 237px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-left: 32px;
       font-size: 16px;
       letter-spacing: 1.6px;
     }
@@ -47,5 +50,10 @@
     padding: 16px;
     background-color: #CADEDF;
     border-radius: 50%;
+    @include mobile {
+      width: 24px;
+      height: 24px;
+      padding: 12px;
+    }
   }
 </style>

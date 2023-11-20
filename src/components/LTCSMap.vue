@@ -61,7 +61,6 @@
   .map{
     border-radius: 0px 40px;
     border: 4px solid #CADEDF;
-    // background-color: aqua;
     background-color: rgba(255, 255, 255, 0.8);
     background-image: url(@/assets/images/map.png);
     background-repeat: no-repeat;
@@ -74,6 +73,11 @@
     margin: 30px;
     background-color: white;
     padding: 163px 230px 275px 230px;
+
+    @include mobile {
+      padding: 122px 0px 243px 0px;
+      margin: 16px;
+    }
   }
   .guidelines{
     display: flex;
@@ -85,12 +89,21 @@
       max-width: 230px;
 
       &:nth-child(1) {
-        // position: relative;
         margin-top: -40px;
       }
       &:nth-child(3) {
-        // position: relative;
         margin-top: 60px;
+      }
+      @include mobile {
+        &:nth-child(1) {
+          margin-top: 0px;
+        }
+        &:nth-child(2) {
+          display: none;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
       }
     }
     &__tips{
