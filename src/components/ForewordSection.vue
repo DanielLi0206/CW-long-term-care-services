@@ -4,11 +4,16 @@
   import { useIntersectionObserver } from '@/composables/useIntersectionObserver.js';
   import { onMounted, ref } from 'vue';
   
-  const { observedElement, elementClass, interOptions, observer } = useIntersectionObserver();
+  const options = {
+    root: null,
+    threshold: 1,
+    rootMargin: "0px 0px 0px 0px",
+    onece: true,
+  };
+  const { observedElement, elementClass, observer } = useIntersectionObserver(options);
   onMounted(() => {
     observedElement.value = document.querySelector('#foreword');
     elementClass.value = 'foreword__translate--after';
-    interOptions(null, 0.7);
     observer.observe(observedElement.value);
   });
 </script>
