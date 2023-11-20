@@ -1,13 +1,55 @@
 <script setup>
   import forewordImage from '@/assets/images/foreword_image.png';
   import subTitle from '@/assets/images/foreword_subtitle.svg';
+  import { onMounted, ref } from 'vue';
+
+  onMounted(() => {
+    // 取得id=foreword的元素
+    const $foreword = document.getElementById('foreword');
+
+    // 執行觀察者
+    observer.observe($foreword);
+  });
+
+  const isEntry = ref(false);
+
+  const reserveCallback = (entries) => {
+    const entry = entries[0];
+    // entry.isIntersecting是一個布林值，代表元素是否進入畫面
+    if (entry.isIntersecting) {
+      // 進入畫面後，就把觀察者取消掉
+      observer.unobserve(entry.target);
+      isEntry.value = true;
+    }
+  }
+
+  // 初始化一個觀察者模式來觀察元素是否進入畫面
+  const observer = new IntersectionObserver( reserveCallback,{
+    root: null,
+    rootMargin: '0px',
+    threshold: [0.7]
+  });
+
+
 </script>
 <template>
   <section id="foreword" class="foreword">
-    <div class="imagery">
+    <div
+      class="imagery"
+      :class="{
+        'imagery__translate--before': !isEntry,
+        'imagery__translate--after': isEntry
+      }"
+    >
       <img class="imagery__image" :src="forewordImage" alt="長期照護情境照" />
     </div>
-    <div class="foreword__content">
+    <div
+      class="foreword__content"
+      :class="{
+        'foreword__translate--before': !isEntry,
+        'foreword__translate--after': isEntry
+      }"
+    >
       <h1 class="foreword__title">長照2.0，<br>讓照顧的路上有專業相挺</h1>
       <img class="foreword__subtitle" :src="subTitle" alt="LONG TERM CARE SERVICES">
       <article class="foreword__aritcle">
@@ -101,6 +143,17 @@
     line-height: 30.4px;
     letter-spacing: 1.6px;
   }
+  &__translate{
+    &--before{
+      opacity: 0;
+      transform: translateX(550px);
+    }
+    &--after{
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 1s ease;
+    }
+  }
 }
 .imagery {
   padding-left: 42.65px;
@@ -112,6 +165,17 @@
   &__image {
     width: 360px;
     height: 420px;
+  }
+  &__translate{
+    &--before{
+      opacity: 0;
+      transform: translateX(-550px);
+    }
+    &--after{
+      opacity: 1;
+      transform: translateX(0);
+      transition: all 1s ease;
+    }
   }
 
   @include mobile {
