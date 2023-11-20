@@ -1,23 +1,34 @@
 <script setup>
-  import { ref } from 'vue'
-  // import { RouterLink } from 'vue-router'
-  import loneTermCareServices from '@/assets/images/logo_LoneTermCareServices.svg';
-  import MinistryOfHealthAndWelfare from '@/assets/images/logo_MinistryOfHealthAndWelfare.svg';
-  import iconBurgerOpen from '@/assets/images/icon_burger_open.svg';
-  import iconBurgerClose from '@/assets/images/icon_burger_close.svg';
-  import { useGetIsMobile } from '@/composables/useGetIsMobile.js';
+import { ref } from "vue";
+// import { RouterLink } from 'vue-router'
+import loneTermCareServices from "@/assets/images/logo_LoneTermCareServices.svg";
+import MinistryOfHealthAndWelfare from "@/assets/images/logo_MinistryOfHealthAndWelfare.svg";
+import iconBurgerOpen from "@/assets/images/icon_burger_open.svg";
+import iconBurgerClose from "@/assets/images/icon_burger_close.svg";
+import { useGetIsMobile } from "@/composables/useGetIsMobile.js";
 
-  const { isMobileFlag } = useGetIsMobile()
-  let isMenuOpen = ref(true);
-  if(isMobileFlag.value) {
-    isMenuOpen.value = false;
-  }
+const { isMobileFlag } = useGetIsMobile();
+let isMenuOpen = ref(true);
+if (isMobileFlag.value) {
+  isMenuOpen.value = false;
+}
+
+const currentSection = ref("home");
+const scrollIntoView = (id) => {
+  const el = document.getElementById(id);
+  el.scrollIntoView({ behavior: "smooth" });
+  currentSection.value = id;
+};
 </script>
 <template>
   <header class="header">
     <div class="header__wrapper">
       <div class="logo">
-        <img class="logo__item" :src="loneTermCareServices" alt="LoneTermCareServices logo" />
+        <img
+          class="logo__item"
+          :src="loneTermCareServices"
+          alt="LoneTermCareServices logo"
+        />
         <img
           class="logo__item"
           :src="MinistryOfHealthAndWelfare"
@@ -25,17 +36,40 @@
         />
       </div>
       <button class="burger burger--open" @click="isMenuOpen = !isMenuOpen">
-        <img :src="iconBurgerOpen" alt="開啟選單的按鈕">
+        <img :src="iconBurgerOpen" alt="開啟選單的按鈕" />
       </button>
       <nav class="menu__wrapper" v-show="isMenuOpen">
         <button class="burger burger--close" @click="isMenuOpen = !isMenuOpen">
-          <img :src="iconBurgerClose" alt="開啟選單的按鈕">
+          <img :src="iconBurgerClose" alt="開啟選單的按鈕" />
         </button>
         <ul class="menu">
-          <li class="menu__item menu__item--active">首頁</li>
-          <li class="menu__item">照護現場</li>
-          <li class="menu__item">一看就懂長照2.0</li>
-          <li class="menu__item">長照地圖</li>
+          <li
+            class="menu__item"
+            :class="{ 'menu__item--active': currentSection === 'home' }"
+          >
+            首頁
+          </li>
+          <li
+            class="menu__item"
+            :class="{ 'menu__item--active': currentSection === 'LTCSLive' }"
+            @click="scrollIntoView('LTCSLive')"
+          >
+            照護現場
+          </li>
+          <li
+            class="menu__item"
+            :class="{'menu__item--active': currentSection === 'LTCSKnowledge'}"
+            @click="scrollIntoView('LTCSKnowledge')"
+          >
+            一看就懂長照2.0
+          </li>
+          <li
+            class="menu__item"
+            :class="{ 'menu__item--active': currentSection === 'LTCSMap' }"
+            @click="scrollIntoView('LTCSMap')"
+          >
+            長照地圖
+          </li>
         </ul>
       </nav>
     </div>
@@ -86,7 +120,7 @@
     border-right: 1px solid #e4e4e4;
 
     color: #333333;
-    font-family: 'Noto Sans TC';
+    font-family: "Noto Sans TC";
     font-size: 16px;
     font-weight: 500;
     line-height: 16px;
@@ -100,7 +134,7 @@
       color: #ec6c00;
       position: relative;
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         left: 50%;
         bottom: -3px;
@@ -131,7 +165,7 @@
       padding: 24px 0;
       border-right: none;
       border-bottom: 1px solid #e4e4e4;
-      
+
       font-size: 24px;
       line-height: 24px;
       letter-spacing: 2.4px;
@@ -140,7 +174,7 @@
       &:last-child {
         border-bottom: none;
       }
-      &:after{
+      &:after {
         content: none;
       }
     }

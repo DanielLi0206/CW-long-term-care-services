@@ -30,7 +30,7 @@
   ]
 </script>
 <template>
-  <section class="section">
+  <section id="LTCSKnowledge" class="section">
     <Title :first="title.first" :second="title.second" :subtitle="title.subtitle"  />
     <div class="wrapper">
       <div class="card" v-for="(item, index) in cardData" :key="index">

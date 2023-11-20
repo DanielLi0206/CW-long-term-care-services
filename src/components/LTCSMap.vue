@@ -1,6 +1,6 @@
 <script setup>
-  import Title from '../components/TitleItem.vue';
-  import Button from '../components/ButtonItem.vue';
+  import Title from '@/components/TitleItem.vue';
+  import Button from '@/components/ButtonItem.vue';
   import guidelinesImage1 from '@/assets/images/guideline_01.svg';
   import guidelinesImage2 from '@/assets/images/guideline_02.svg';
   import guidelinesImage3 from '@/assets/images/guideline_03.svg';
@@ -27,7 +27,7 @@
   ];
 </script>
 <template>
-  <section class="section">
+  <section id="LTCSMap" class="section">
     <Title :first="title.first" :second="title.second" :subtitle="title.subtitle"  />
     <div class="map">
       <div class="mask">

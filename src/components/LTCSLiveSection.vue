@@ -44,7 +44,7 @@
 
 </script>
 <template>
-  <section class="section">
+  <section id="LTCSLive" class="section">
     <Title :first="title.first" :second="title.second" :subtitle="title.subtitle"  />
     <swiper
       :slidesPerView="'auto'"
