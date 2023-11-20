@@ -56,7 +56,12 @@
     padding-bottom: 160px;
     margin-left: 40px;
     margin-right: 40px;
-    margin-bottom: 160px;
+    @include mobile {
+      padding-top: 56px;
+      padding-bottom: 80px;
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
   .map{
     border-radius: 0px 40px;

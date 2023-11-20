@@ -50,7 +50,10 @@
 <style lang="scss" scoped>
   .section {
     padding-top: 120px;
-    // position: relative;
+    @include mobile {
+      padding-top: 56px;
+      padding-bottom: 56px;
+    }
   }
   .wrapper {
     position: relative;
@@ -73,10 +76,9 @@
     }
 
     @include mobile {
-      // margin-left: 40px;
-      // margin-right: 40px;
       margin-left: 24px;
       margin-right: 24px;
+      padding-bottom: 0;
       flex-direction: column;
       gap: 24px;
       &::before {
@@ -86,12 +88,15 @@
   }
   .card {
     text-align: center;
-
     &:nth-child(2) {
       margin-top: -40px;
       @include mobile {
         margin-top: 0;
       }
+    }
+    @include mobile {
+      margin-left: 16px;
+      margin-right: 16px;
     }
 
     &__image {
