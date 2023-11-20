@@ -5,7 +5,7 @@
   import MinistryOfHealthAndWelfare from '@/assets/images/logo_MinistryOfHealthAndWelfare.svg';
   import iconBurgerOpen from '@/assets/images/icon_burger_open.svg';
   import iconBurgerClose from '@/assets/images/icon_burger_close.svg';
-  import { useGetIsMobile } from '../../composables/useGetIsMobile.js';
+  import { useGetIsMobile } from '@/composables/useGetIsMobile.js';
 
   const { isMobileFlag } = useGetIsMobile()
   let isMenuOpen = ref(true);
