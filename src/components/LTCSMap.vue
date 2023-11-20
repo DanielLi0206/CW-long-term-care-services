@@ -33,7 +33,12 @@
       <div class="mask">
         <div class="guidelines">
           <div class="guidelines__item" v-for="(item, index) in guidelinesData" :key="index">
-            <img :src="item.image" class="guidelines__image" :alt="item.content">
+            <img
+              :src="item.image"
+              class="guidelines__image"
+              :class="`delay__${index}`"
+              :alt="item.content"
+            >
             <p class="guidelines__tips">TIPS {{ index +1 }}</p>
             <p class="guidelines__content">{{ item.content }}</p>
           </div>
@@ -110,12 +115,41 @@
       display: block;
       margin: auto;
       margin-bottom: 16px;
+      animation: popup ease-in-out infinite;
+      animation-fill-mode: forwards;
+      animation-duration: 3s;
     }
     &__btn{
       position: absolute;
       bottom: -112px;
       left: 50%;
       transform: translateX(-50%);
+    }
+  }
+  .delay {
+    &__0{
+      animation-delay: 0s;
+    }
+    &__1{
+      animation-delay: 1s;
+    }
+    &__2{
+      animation-delay: 2s;
+    }
+  }
+
+  @keyframes popup {
+    0% {
+      transform: scale(1);
+    }
+    15% {
+      transform: scale(1.1);
+    }
+    30% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 </style>
