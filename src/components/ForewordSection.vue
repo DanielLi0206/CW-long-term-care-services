@@ -6,25 +6,21 @@
   import { onMounted, ref } from 'vue';
 
   const { isMobileFlag } = useGetIsMobile()
-  if(!isMobileFlag.value) {
-    const options = {
-      root: null,
-      threshold: 1,
-      rootMargin: "0px 0px 0px 0px",
-      onece: true,
-    };
-    const { observedElement, elementClass, observer } = useIntersectionObserver(options);
-  }
+  const options = {
+    root: null,
+    threshold: 1,
+    rootMargin: "0px 0px 0px 0px",
+    onece: true,
+  };
+  const { observedElement, elementClass, observer } = useIntersectionObserver(options);
   onMounted(() => {
-    if(!isMobileFlag.value) {
-      observedElement.value = document.querySelector('#foreword');
-      elementClass.value = 'foreword__translate--after';
-      observer.observe(observedElement.value);
-    }
+    observedElement.value = document.querySelector('#foreword');
+    elementClass.value = 'foreword__translate--after';
+    observer.observe(observedElement.value);
   });
 </script>
 <template>
-  <section id="foreword" class="foreword" :class="{'foreword__translate--before' : !isMobileFlag}">
+  <section id="foreword" class="foreword foreword__translate--before">
     <div class="imagery">
       <img class="imagery__image" :src="forewordImage" alt="長期照護情境照" />
     </div>
