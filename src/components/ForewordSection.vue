@@ -1,55 +1,23 @@
 <script setup>
   import forewordImage from '@/assets/images/foreword_image.png';
   import subTitle from '@/assets/images/foreword_subtitle.svg';
+  import { useIntersectionObserver } from '@/composables/useIntersectionObserver.js';
   import { onMounted, ref } from 'vue';
-
+  
+  const { observedElement, elementClass, interOptions, observer } = useIntersectionObserver();
   onMounted(() => {
-    // 取得id=foreword的元素
-    const $foreword = document.getElementById('foreword');
-
-    // 執行觀察者
-    observer.observe($foreword);
+    observedElement.value = document.querySelector('#foreword');
+    elementClass.value = 'foreword__translate--after';
+    interOptions(null, 0.7);
+    observer.observe(observedElement.value);
   });
-
-  const isEntry = ref(false);
-
-  const reserveCallback = (entries) => {
-    const entry = entries[0];
-    // entry.isIntersecting是一個布林值，代表元素是否進入畫面
-    if (entry.isIntersecting) {
-      // 進入畫面後，就把觀察者取消掉
-      observer.unobserve(entry.target);
-      isEntry.value = true;
-    }
-  }
-
-  // 初始化一個觀察者模式來觀察元素是否進入畫面
-  const observer = new IntersectionObserver( reserveCallback,{
-    root: null,
-    rootMargin: '0px',
-    threshold: [0.7]
-  });
-
-
 </script>
 <template>
-  <section id="foreword" class="foreword">
-    <div
-      class="imagery"
-      :class="{
-        'imagery__translate--before': !isEntry,
-        'imagery__translate--after': isEntry
-      }"
-    >
+  <section id="foreword" class="foreword foreword__translate--before">
+    <div class="imagery">
       <img class="imagery__image" :src="forewordImage" alt="長期照護情境照" />
     </div>
-    <div
-      class="foreword__content"
-      :class="{
-        'foreword__translate--before': !isEntry,
-        'foreword__translate--after': isEntry
-      }"
-    >
+    <div class="foreword__content">
       <h1 class="foreword__title">長照2.0，<br>讓照顧的路上有專業相挺</h1>
       <img class="foreword__subtitle" :src="subTitle" alt="LONG TERM CARE SERVICES">
       <article class="foreword__aritcle">
@@ -64,6 +32,11 @@
 </template>
 
 <style lang="scss" scoped>
+@mixin translateAfter() {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 1s ease;
+}
 .foreword{
   display: flex;
   justify-content: center;
@@ -145,13 +118,22 @@
   }
   &__translate{
     &--before{
-      opacity: 0;
-      transform: translateX(550px);
+      .imagery {
+        opacity: 0;
+        transform: translateX(-550px);
+      }
+      .foreword__content {
+        opacity: 0;
+        transform: translateX(550px);
+      }
     }
     &--after{
-      opacity: 1;
-      transform: translateX(0);
-      transition: all 1s ease;
+      .imagery {
+        @include translateAfter;
+      }
+      .foreword__content {
+        @include translateAfter;
+      }
     }
   }
 }
@@ -166,18 +148,6 @@
     width: 360px;
     height: 420px;
   }
-  &__translate{
-    &--before{
-      opacity: 0;
-      transform: translateX(-550px);
-    }
-    &--after{
-      opacity: 1;
-      transform: translateX(0);
-      transition: all 1s ease;
-    }
-  }
-
   @include mobile {
     display: none;
   }
