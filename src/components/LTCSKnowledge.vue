@@ -95,9 +95,12 @@
     }
 
     &__image {
-      border-radius: 50%;
-      padding: 6px;
+      width: 198px;
+      height: 198px;
+      margin-left: auto;
+      margin-right: auto;
       margin-bottom: 16px;
+      padding: 6px;
       position: relative;
       img {
         display: block;
