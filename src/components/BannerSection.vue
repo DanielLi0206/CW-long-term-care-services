@@ -66,8 +66,8 @@
       }
     }
     &__image{
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 62.5vw;
       object-position: center;
       object-fit: cover;
       @include mobile {
